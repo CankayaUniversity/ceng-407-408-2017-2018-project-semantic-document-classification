@@ -1,0 +1,45 @@
+from bs4 import BeautifulSoup
+import urllib
+import os
+import re
+import sys
+
+def get_url_nodes(url):
+	r = urllib.urlopen(url).read()
+	soup = BeautifulSoup(r,"html.parser")
+	return soup
+
+
+output_folder_name = sys.argv[1]
+soup = get_url_nodes("http://www.hurriyet.com.tr/ekonomi")
+items = soup.find_all("item")
+
+for i in range(len(items)):
+	item = items[i]
+	guid_0_list = item.find_all("guid")
+	guid_0 = guid_0_list[0]
+	link = guid_0.get_text()
+	soup_i = get_url_nodes(link)
+	regex = re.compile(".*")
+	lines_with_class = soup_i.find_all("p", class_ = regex)
+	lines_with_class_set = set(lines_with_class)
+
+	lines_all = soup_i.find_all("p")
+	lines_all_set = set(lines_all)
+	
+	lines_set = lines_all_set.difference(lines_with_class_set)
+	lines = list(lines_set)	
+	print len(lines_all), len(lines_with_class)	
+	#raw_input()
+	print i
+	#print texts[0]
+	#print type(texts[0])
+	text_str = ""
+	for j in range(len(lines)):
+		line =	lines[j].get_text()		
+		text_str += line
+	base_filename = "%d.txt" % i			
+	filename = os.path.join(output_folder_name, base_filename)	
+	with open(filename, "w") as ofstr:
+		ofstr.write(text_str.encode(errors = "ignore"))		
+	print text_str
