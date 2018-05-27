@@ -29,7 +29,7 @@
     }
   </style>
 </head>
-<body>
+<body style="background-image:url(images1.jpg); background-repeat:no-repeat"  >
     <form id="form1" runat="server">
     <div class="jumbotron">
   <div class="container text-center">

@@ -11,7 +11,7 @@ public partial class ListWorkerInformation : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            DENEMEEntities db = new DENEMEEntities();
+            semantıcEntities db = new semantıcEntities();
 
             USER [] listOfUsers = (from x in db.USER where x.IsActive == true select x).ToArray();
 
@@ -23,7 +23,7 @@ public partial class ListWorkerInformation : System.Web.UI.Page
     {
         GridViewRow row = (GridViewRow)grdList.Rows[e.RowIndex];
         Label lbldeleteid = (Label)row.FindControl("lblID");
-        DENEMEEntities db = new DENEMEEntities();
+        semantıcEntities db = new semantıcEntities();
         int id = Convert.ToInt32(lbldeleteid.Text);
 
         USER m = (from x in db.USER where x.UserID == id && x.IsActive == true select x).SingleOrDefault();
@@ -38,7 +38,7 @@ public partial class ListWorkerInformation : System.Web.UI.Page
     {
         grdList.EditIndex = e.NewEditIndex;
 
-        DENEMEEntities db = new DENEMEEntities();
+        semantıcEntities db = new semantıcEntities();
 
         USER[] m = (from x in db.USER where x.IsActive == true select x).ToArray();
         grdList.DataSource = m;
@@ -47,7 +47,7 @@ public partial class ListWorkerInformation : System.Web.UI.Page
     protected void grdList_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         grdList.EditIndex = -1;
-        DENEMEEntities db = new DENEMEEntities();
+        semantıcEntities db = new semantıcEntities();
 
         USER[] m = (from x in db.USER where x.IsActive == true select x).ToArray();
         grdList.DataSource = m;
@@ -63,7 +63,7 @@ public partial class ListWorkerInformation : System.Web.UI.Page
         TextBox address = (TextBox)grdList.Rows[e.RowIndex].FindControl("txtAddress");
         TextBox city = (TextBox)grdList.Rows[e.RowIndex].FindControl("txtCity");
         TextBox password = (TextBox)grdList.Rows[e.RowIndex].FindControl("txtPassword");
-        DENEMEEntities db = new DENEMEEntities();
+        semantıcEntities db = new semantıcEntities();
 
         int id1 = Convert.ToInt32(id.Text);
 

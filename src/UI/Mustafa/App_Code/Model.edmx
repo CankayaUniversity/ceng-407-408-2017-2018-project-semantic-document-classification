@@ -4,52 +4,78 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DENEMEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ADMIN">
+      <Schema Namespace="semantıcModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="semantıcModelStoreContainer">
+          <EntitySet Name="admın" EntityType="semantıcModel.Store.admın" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Classification" EntityType="semantıcModel.Store.Classification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CLUSTER" EntityType="semantıcModel.Store.CLUSTER" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DATASET" EntityType="semantıcModel.Store.DATASET" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DOCUMENT" EntityType="semantıcModel.Store.DOCUMENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FILE" EntityType="semantıcModel.Store.FILE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="semantıcModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="USER" EntityType="semantıcModel.Store.USER" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="admın">
           <Key>
             <PropertyRef Name="AdminID" />
           </Key>
-          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="AdminID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="CLASSIFICATIONID" />
+          </Key>
+          <Property Name="CLASSIFICATIONID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CLUSTER">
           <Key>
             <PropertyRef Name="ClusterID" />
           </Key>
-          <Property Name="ClusterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DataSetID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClusterID" Type="int" Nullable="false" />
+          <Property Name="DataSetID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DATASET">
           <Key>
             <PropertyRef Name="DatasetID" />
           </Key>
-          <Property Name="DatasetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="URL" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DatasetID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="URL" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="DOCUMENT">
           <Key>
             <PropertyRef Name="DocumentID" />
           </Key>
-          <Property Name="DocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClusterID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Detail" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="DocumentID" Type="int" Nullable="false" />
+          <Property Name="ClusterID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="FILEID" Type="int" />
+        </EntityType>
+        <EntityType Name="FILE">
+          <Key>
+            <PropertyRef Name="FILEID" />
+          </Key>
+          <Property Name="FILEID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DocumentID" Type="int" />
+          <Property Name="Path" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
           <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
@@ -57,74 +83,92 @@
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <EntityContainer Name="DENEMEModelStoreContainer">
-          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CLUSTER" EntityType="Self.CLUSTER" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DATASET" EntityType="Self.DATASET" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
-        </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DENEMEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ADMIN">
+      <Schema Namespace="semantıcModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="semantıcEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="admın" EntityType="semantıcModel.admın" />
+          <EntitySet Name="Classification" EntityType="semantıcModel.Classification" />
+          <EntitySet Name="CLUSTER" EntityType="semantıcModel.CLUSTER" />
+          <EntitySet Name="DATASET" EntityType="semantıcModel.DATASET" />
+          <EntitySet Name="DOCUMENT" EntityType="semantıcModel.DOCUMENT" />
+          <EntitySet Name="FILE" EntityType="semantıcModel.FILE" />
+          <EntitySet Name="sysdiagrams" EntityType="semantıcModel.sysdiagrams" />
+          <EntitySet Name="USER" EntityType="semantıcModel.USER" />
+        </EntityContainer>
+        <EntityType Name="admın">
           <Key>
             <PropertyRef Name="AdminID" />
           </Key>
-          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="AdminID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="CLASSIFICATIONID" />
+          </Key>
+          <Property Name="CLASSIFICATIONID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CLUSTER">
           <Key>
             <PropertyRef Name="ClusterID" />
           </Key>
-          <Property Name="ClusterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DataSetID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClusterID" Type="Int32" Nullable="false" />
+          <Property Name="DataSetID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="DATASET">
           <Key>
             <PropertyRef Name="DatasetID" />
           </Key>
-          <Property Name="DatasetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DatasetID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="DOCUMENT">
           <Key>
             <PropertyRef Name="DocumentID" />
           </Key>
-          <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClusterID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DocumentID" Type="Int32" Nullable="false" />
+          <Property Name="ClusterID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Detail" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="FILEID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FILE">
+          <Key>
+            <PropertyRef Name="FILEID" />
+          </Key>
+          <Property Name="FILEID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DocumentID" Type="Int32" />
+          <Property Name="Path" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
@@ -132,33 +176,25 @@
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
-        <EntityContainer Name="DENEMEEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
-          <EntitySet Name="CLUSTER" EntityType="Self.CLUSTER" />
-          <EntitySet Name="DATASET" EntityType="Self.DATASET" />
-          <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="USER" EntityType="Self.USER" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DENEMEModelStoreContainer" CdmEntityContainer="DENEMEEntities">
-          <EntitySetMapping Name="ADMIN">
-            <EntityTypeMapping TypeName="DENEMEModel.ADMIN">
-              <MappingFragment StoreEntitySet="ADMIN">
+        <EntityContainerMapping StorageEntityContainer="semantıcModelStoreContainer" CdmEntityContainer="semantıcEntities">
+          <EntitySetMapping Name="admın">
+            <EntityTypeMapping TypeName="semantıcModel.admın">
+              <MappingFragment StoreEntitySet="admın">
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -168,8 +204,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Classification">
+            <EntityTypeMapping TypeName="semantıcModel.Classification">
+              <MappingFragment StoreEntitySet="Classification">
+                <ScalarProperty Name="CLASSIFICATIONID" ColumnName="CLASSIFICATIONID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CLUSTER">
-            <EntityTypeMapping TypeName="DENEMEModel.CLUSTER">
+            <EntityTypeMapping TypeName="semantıcModel.CLUSTER">
               <MappingFragment StoreEntitySet="CLUSTER">
                 <ScalarProperty Name="ClusterID" ColumnName="ClusterID" />
                 <ScalarProperty Name="DataSetID" ColumnName="DataSetID" />
@@ -178,7 +221,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DATASET">
-            <EntityTypeMapping TypeName="DENEMEModel.DATASET">
+            <EntityTypeMapping TypeName="semantıcModel.DATASET">
               <MappingFragment StoreEntitySet="DATASET">
                 <ScalarProperty Name="DatasetID" ColumnName="DatasetID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -188,18 +231,29 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DOCUMENT">
-            <EntityTypeMapping TypeName="DENEMEModel.DOCUMENT">
+            <EntityTypeMapping TypeName="semantıcModel.DOCUMENT">
               <MappingFragment StoreEntitySet="DOCUMENT">
                 <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
                 <ScalarProperty Name="ClusterID" ColumnName="ClusterID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Detail" ColumnName="Detail" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FILEID" ColumnName="FILEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILE">
+            <EntityTypeMapping TypeName="semantıcModel.FILE">
+              <MappingFragment StoreEntitySet="FILE">
+                <ScalarProperty Name="FILEID" ColumnName="FILEID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DENEMEModel.sysdiagrams">
+            <EntityTypeMapping TypeName="semantıcModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -210,7 +264,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USER">
-            <EntityTypeMapping TypeName="DENEMEModel.USER">
+            <EntityTypeMapping TypeName="semantıcModel.USER">
               <MappingFragment StoreEntitySet="USER">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -238,9 +292,8 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

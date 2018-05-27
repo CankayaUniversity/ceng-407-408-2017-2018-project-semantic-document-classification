@@ -15,7 +15,7 @@ public partial class _Default : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            DENEMEEntities db = new DENEMEEntities();
+            semantıcEntities db = new semantıcEntities();
             DATASET[] dataSetList = (from x in db.DATASET where x.IsActive == true select x).ToArray();
 
             for (int i = 0; i < dataSetList.Length; i++)

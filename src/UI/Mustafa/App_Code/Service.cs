@@ -11,7 +11,9 @@ public class Service : IService
     public USER funcLoginCheck(string Email, string Password)
     {
         USER returnUserInfo = new USER();
-        using(DENEMEEntities Bitirme =  new DENEMEEntities())
+        using (semantıcEntities Bitirme = new semantıcEntities())
+        
+
         {
             string strPasswordHash = HashPassword(Password);
             USER customerCheck = (from info in Bitirme.USER
@@ -24,11 +26,12 @@ public class Service : IService
         }
         return returnUserInfo;
     }
+    
 
     public bool funcRegister(string Name, string Surname,string City,string Phone, string Email,string Address, string Password)
     {
         bool boolCheck = false;
-        using (DENEMEEntities Bitirme = new DENEMEEntities())
+        using (semantıcEntities Bitirme = new semantıcEntities())
         {
             USER UserCheck = (from info in Bitirme.USER
                                        where info.Email == Email

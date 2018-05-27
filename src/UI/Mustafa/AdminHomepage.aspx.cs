@@ -9,7 +9,7 @@ public partial class AdminHomepage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ADMIN gelenAdmin = (ADMIN)Session["Admin"];
+        admın gelenAdmin = (admın)Session["Admin"];
         lblMessage.Visible = true;
         lblMessage.Text = "Merhaba " + gelenAdmin.Name + " " + gelenAdmin.Surname;
     }

@@ -11,7 +11,7 @@ public partial class AddCluster : System.Web.UI.Page
     {
         USER gelenUser = (USER)Session["User"];
         lblMessage.Visible = true;
-        lblMessage.Text = "Merhaba " + gelenUser.Name + " " + gelenUser.Surname;
+        //lblMessage.Text = "Merhaba " + gelenUser.Name + " " + gelenUser.Surname;
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -21,7 +21,7 @@ public partial class AddCluster : System.Web.UI.Page
         }
         else
         {
-            DENEMEEntities db = new DENEMEEntities();
+            semantıcEntities db = new semantıcEntities();
             DATASET d = new DATASET();
             d.IsActive = true;
             d.Name = TextBox1.Text;
